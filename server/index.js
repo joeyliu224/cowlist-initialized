@@ -13,7 +13,7 @@ const router = require('./routers.js');
 app.use(parser.json());
 
 //set up routes
-app.use('/', router);
+app.use('/api', router);
 
 app.use(express.static('./client/dist'))
 
