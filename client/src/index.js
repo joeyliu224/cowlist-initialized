@@ -36,6 +36,18 @@ class App extends React.Component {
     )
   }
 
+  deleteCow(event) {
+    const target = event.target;
+    console.log({target})
+    console.log(target.attributes.id.textContent)
+    const id = parseInt(target.attributes.id.textContent);
+    axios.delete(`/api/cows:${id}`).then(
+      ()=>{
+        this.getCows()
+      }
+    )
+  }
+
   handleInputChange(event) {
     const target = event.target;
     if(target.name === 'name') {
@@ -66,6 +78,12 @@ class App extends React.Component {
     });
 
   }
+
+  // handleDelete(event) {
+  //   const target = event.target;
+  //   console.log({target})
+
+  // }
 
   componentDidMount() {
     console.log();
@@ -106,7 +124,11 @@ class App extends React.Component {
         <ul>
           {
             this.state.cows.map((cow) => {
-              return <li key={cow.id} onClick={this.handleClick.bind(this)}>{cow.name}</li>
+              return <div key={cow.id}>
+                        <li onClick={this.handleClick.bind(this)}>{cow.name}</li>
+                        <button>update</button>
+                        <button id={cow.id} onClick={this.deleteCow.bind(this)}>delete</button>
+                    </div>
             })
           }
         </ul>
