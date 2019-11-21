@@ -17,9 +17,8 @@ class App extends React.Component {
 
   getCows() {
     axios.get('/api/cows').then(
-      data => {
-        console.log(data);
-        this.setState({cows: data.data});
+      cowlist => {
+        this.setState({cows: cowlist.data});
       }
     )
   };
@@ -30,7 +29,11 @@ class App extends React.Component {
     axios.post('/api/cows',{
       name: this.state.name,
       description: this.state.description
-    })
+    }).then(
+      () => {
+        this.getCows()
+      }
+    )
   }
 
   handleInputChange(event) {
@@ -59,7 +62,8 @@ class App extends React.Component {
     this.setState({
       nameDisplay: name,
       descriptionDisplay: des,
-      isClicked: !this.state.isClicked});
+      isClicked: !this.state.isClicked
+    });
 
   }
 
@@ -73,7 +77,7 @@ class App extends React.Component {
     <div>
       <div>Cowlist</div>
       <div>
-        {this.state.isClicked ? <div>name:{this.state.nameDisplay},description:{this.state.descriptionDisplay}</div> : null}
+        {this.state.isClicked ? <div>{this.state.nameDisplay}:{this.state.descriptionDisplay}</div> : null}
       </div>
       <div>
         <form onSubmit={this.sendCows.bind(this)}>

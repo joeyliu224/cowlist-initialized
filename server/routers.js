@@ -6,8 +6,8 @@ router.get('/cows', controller.cowlist.get);
 
 router.post('/cows', controller.cowlist.post);
 
-//router.put('api/cows:id', controller.cows.put);
+router.put('/cows:id', controller.cowlist.put);
 
-//router.delete('api/cows:id', controller.cows.delete);
+router.delete('/cows:id', controller.cowlist.delete);
 
 module.exports = router;
