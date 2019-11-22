@@ -11,7 +11,9 @@ class App extends React.Component {
       description: '',
       isClicked: false,
       nameDisplay: '',
-      descriptionDisplay: ''
+      descriptionDisplay: '',
+      update: false,
+      nameUpdate: '',
     };
   }
 
@@ -42,6 +44,16 @@ class App extends React.Component {
     console.log(target.attributes.id.textContent)
     const id = parseInt(target.attributes.id.textContent);
     axios.delete(`/api/cows:${id}`).then(
+      ()=>{
+        this.getCows()
+      }
+    )
+  }
+
+  updateCows(event) {
+    const target = event.target;
+    const id = parseInt(target.attributes.id.textContent);
+    axios.put(`/api/cows:${id}`,{name:this.state.nameUpdate}).then(
       ()=>{
         this.getCows()
       }
@@ -79,11 +91,19 @@ class App extends React.Component {
 
   }
 
-  // handleDelete(event) {
-  //   const target = event.target;
-  //   console.log({target})
+  handleUpdate(event) {
+    const target = event.target;
+    this.setState({
+      update: !this.state.update
+    })
+  }
 
-  // }
+  handleNameUpdate(event) {
+    const target = event.target;
+    this.setState({
+      nameUpdate: target.value
+    })
+  }
 
   componentDidMount() {
     console.log();
@@ -126,7 +146,7 @@ class App extends React.Component {
             this.state.cows.map((cow) => {
               return <div key={cow.id}>
                         <li onClick={this.handleClick.bind(this)}>{cow.name}</li>
-                        <button>update</button>
+                        <button id={cow.id} onClick={this.handleUpdate.bind(this)}>update</button>{this.state.update ? <form id={cow.id} onSubmit={this.updateCows.bind(this)}><input type='string' value={this.state.nameUpdate} onChange={this.handleNameUpdate.bind(this)}/><input type="submit" value="Submit"/></form> : null}
                         <button id={cow.id} onClick={this.deleteCow.bind(this)}>delete</button>
                     </div>
             })
