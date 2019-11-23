@@ -24,5 +24,15 @@ const retreive = () => {
     return Cow.find().exec();
 }
 
+const deleteOne = (id) => {
+    const objId = `ObjectId(${id})`
+    return Cow.deleteOne({_id: id},(err)=>{
+        if(err) {
+            console.log(err);
+        }
+    })
+}
+
 module.exports.save = save;
 module.exports.retreive = retreive;
+module.exports.delete = deleteOne;

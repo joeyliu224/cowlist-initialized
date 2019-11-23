@@ -14,6 +14,7 @@ class App extends React.Component {
     };
     this.getCows.bind(this);
     this.handleClick.bind(this);
+    this.handleDelete.bind(this);
   }
 
   getCows(){
@@ -29,7 +30,6 @@ class App extends React.Component {
 
   handleClick(e){
     const target = e.target;
-    console.log({target})
     const name = target.textContent;
     var description;
     for(var cow of this.state.cows) {
@@ -41,7 +41,17 @@ class App extends React.Component {
       isClicked: !this.state.isClicked,
       display: `${name}:${description}`
     })
-    console.log(this.state)
+  }
+
+  handleDelete(e){
+    const target = e.target;
+    console.log({target})
+    const id = target.id;
+    axios.delete(`/api/cows:${id}`).then(
+      () =>{
+        this.getCows()
+      }
+    )
   }
 
   componentDidMount(){
@@ -55,7 +65,7 @@ class App extends React.Component {
       <h1>Cowlist</h1>
       <div>{this.state.display}</div>
       <Form getCows={this.getCows.bind(this)}/>
-      <List cows={this.state.cows} handleClick={this.handleClick.bind(this)} display={this.state.display}/>
+      <List cows={this.state.cows} handleClick={this.handleClick.bind(this)} handleDelete={this.handleDelete.bind(this)}/>
     </div>
     );
   }

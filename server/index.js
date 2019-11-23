@@ -7,7 +7,7 @@ const db = require('../db/index.js');
 app.use(express.static('./client/dist'))
 app.use(parser.json())
 
-app.get('/', (req, res) => res.send('Hello World!'))
+//app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post('/api/cows',(req,res) => {
     db.save(req.body);
@@ -23,6 +23,19 @@ app.get('/api/cows',(req,res) => {
         (err) =>{
             console.log(err);
             res.sendStatus(404);
+        }
+    )
+})
+
+
+app.delete(`/api/cows:id`,(req,res) => {
+    console.log('req.url:',req.url.slice(10))
+    const id = req.url.slice(10)
+    db.delete(id).then(
+        res.status(200).send('deleted')
+    ).catch(
+        (err) => {
+            res.sendStatus(500);
         }
     )
 })
