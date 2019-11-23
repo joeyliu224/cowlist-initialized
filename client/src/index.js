@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import List from './components/List.js';
+import Form from './components/Form.js';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -32,6 +33,7 @@ class App extends React.Component {
     return (
     <div>
       <h1>Cowlist</h1>
+      <Form/>
       <List cows={this.state.cows}/>
     </div>
     );
