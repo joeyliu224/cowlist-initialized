@@ -11,7 +11,7 @@ class App extends React.Component {
       cows:[],
       display: null,
       isClicked: false,
-      needUpdate: false,
+      needUpdate: null,
       updateName: {name:''}
     };
     this.getCows.bind(this);
@@ -19,6 +19,7 @@ class App extends React.Component {
     this.handleDelete.bind(this);
     this.handleUpdate.bind(this);
     this.handleNameChange.bind(this);
+    this.handleUpdateSubmit.bind(this);
   }
 
   getCows(){
@@ -61,7 +62,7 @@ class App extends React.Component {
     const id = e.target.id;
     
     this.setState({
-      needUpdate: !this.state.needUpdate
+      needUpdate: id
     })
   }
 
@@ -76,6 +77,7 @@ class App extends React.Component {
   handleUpdateSubmit(e){
     const target = e.target;
     const id = target.id;
+    e.preventDefault();
     axios.put(`/api/cows:${id}`,this.state.updateName).then(
       ()=>{
         this.getCows();
