@@ -8,9 +8,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cows:[]
+      cows:[],
+      display: null,
+      isClicked: false
     };
     this.getCows.bind(this);
+    this.handleClick.bind(this);
   }
 
   getCows(){
@@ -24,6 +27,23 @@ class App extends React.Component {
     )
   }
 
+  handleClick(e){
+    const target = e.target;
+    console.log({target})
+    const name = target.textContent;
+    var description;
+    for(var cow of this.state.cows) {
+      if(cow.name === name){
+        description = cow.description;
+      }
+    }
+    this.setState({
+      isClicked: !this.state.isClicked,
+      display: `${name}:${description}`
+    })
+    console.log(this.state)
+  }
+
   componentDidMount(){
     console.log(this.state)
     this.getCows();
@@ -33,8 +53,9 @@ class App extends React.Component {
     return (
     <div>
       <h1>Cowlist</h1>
+      <div>{this.state.display}</div>
       <Form getCows={this.getCows.bind(this)}/>
-      <List cows={this.state.cows}/>
+      <List cows={this.state.cows} handleClick={this.handleClick.bind(this)} display={this.state.display}/>
     </div>
     );
   }

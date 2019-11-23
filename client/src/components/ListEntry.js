@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ListEntry({cow}) {
+export default function ListEntry({cow,handleClick,display}) {
     return (
         <div>
-            <li>{cow.name}</li>
+            <li key={cow._id} onClick={handleClick}>{cow.name}</li>
         </div>
     )
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import ListEnrty from './ListEntry';
 
-var List = ({cows}) => (
+var List = ({cows,handleClick}) => (
     <div>
         <ul>
         {cows.map((cow)=>{
             return(
-            <ListEnrty cow={cow}/>
+            <ListEnrty cow={cow} handleClick={handleClick}/>
             )
         })}
         </ul>
