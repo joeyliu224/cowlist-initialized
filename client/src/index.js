@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = {
       cows:[]
     };
-    //this.getCows.bind(this);
+    this.getCows.bind(this);
   }
 
   getCows(){
@@ -33,7 +33,7 @@ class App extends React.Component {
     return (
     <div>
       <h1>Cowlist</h1>
-      <Form/>
+      <Form getCows={this.getCows.bind(this)}/>
       <List cows={this.state.cows}/>
     </div>
     );
