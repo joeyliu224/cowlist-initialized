@@ -25,14 +25,24 @@ const retreive = () => {
 }
 
 const deleteOne = (id) => {
-    const objId = `ObjectId(${id})`
+    //const objId = `ObjectId(${id})`;
     return Cow.deleteOne({_id: id},(err)=>{
         if(err) {
             console.log(err);
         }
-    })
+    }).exec();
+}
+
+const update = (id,name) =>{
+    //const objId = `ObjectId(${id})`;
+    return Cow.updateOne({_id: id},{name:name},(err)=>{
+        if(err) {
+            console.log(err);
+        }
+    }).exec();
 }
 
 module.exports.save = save;
 module.exports.retreive = retreive;
 module.exports.delete = deleteOne;
+module.exports.update = update;

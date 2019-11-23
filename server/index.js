@@ -29,13 +29,30 @@ app.get('/api/cows',(req,res) => {
 
 
 app.delete(`/api/cows:id`,(req,res) => {
-    console.log('req.url:',req.url.slice(10))
-    const id = req.url.slice(10)
+    //console.log('req.url:',req.url.slice(10))
+    const id = req.url.slice(10);
     db.delete(id).then(
-        res.status(200).send('deleted')
+        () => {
+            res.status(200).send('deleted')
+        }
     ).catch(
         (err) => {
             res.sendStatus(500);
+        }
+    )
+})
+
+app.put(`/api/cows:id`,(req,res) => {
+    const id = req.url.slice(10);
+    console.log('id and name: ',id,req.body.name)
+    db.update(id,req.body.name).then(
+        () => {
+            res.status(200);
+            res.send('updated');
+        }
+    ).catch(
+        (err) => {
+            res.sendStatus(418);
         }
     )
 })
