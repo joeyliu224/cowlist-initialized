@@ -12,7 +12,7 @@ class App extends React.Component {
       display: null,
       isClicked: false,
       needUpdate: null,
-      updateName: {name:''}
+      updateName: {}
     };
     this.getCows.bind(this);
     this.handleClick.bind(this);
@@ -69,6 +69,7 @@ class App extends React.Component {
   handleNameChange(e) {
     const target = e.target;
     console.log({target})
+    console.log('value:',target.value)
     this.setState({
       updateName: {name: target.value}
     })
@@ -103,7 +104,8 @@ class App extends React.Component {
         handleUpdate={this.handleUpdate.bind(this)}
         handleNameChange={this.handleNameChange.bind(this)}
         needUpdate={this.state.needUpdate}
-        handleUpdateSubmit={this.handleUpdateSubmit.bind(this)}/>
+        handleUpdateSubmit={this.handleUpdateSubmit.bind(this)}
+        updateName={this.state.updateName.name}/>
     </div>
     );
   }

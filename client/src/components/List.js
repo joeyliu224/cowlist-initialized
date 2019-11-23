@@ -1,7 +1,7 @@
 import React from 'react';
 import ListEnrty from './ListEntry';
 
-var List = ({cows,handleClick,handleDelete,handleUpdate,handleNameChange,needUpdate,handleUpdateSubmit}) => (
+var List = ({cows,handleClick,handleDelete,handleUpdate,handleNameChange,needUpdate,handleUpdateSubmit,updateName}) => (
     <div>
         <ul>
         {cows.map((cow)=>{
@@ -13,7 +13,8 @@ var List = ({cows,handleClick,handleDelete,handleUpdate,handleNameChange,needUpd
                 handleUpdate={handleUpdate}
                 handleNameChange={handleNameChange}
                 needUpdate={needUpdate}
-                handleUpdateSubmit={handleUpdateSubmit}/>
+                handleUpdateSubmit={handleUpdateSubmit}
+                updateName={updateName}/>
             )
         })}
         </ul>
