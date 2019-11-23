@@ -1,10 +1,13 @@
 import React from 'react';
+import ListEnrty from './ListEntry';
 
 var List = ({cows}) => (
     <div>
         <ul>
         {cows.map((cow)=>{
-            return<li key={cow._id}>{cow.name}</li>
+            return(
+            <ListEnrty cow={cow}/>
+            )
         })}
         </ul>
     </div>
